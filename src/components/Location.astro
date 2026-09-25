@@ -1,0 +1,29 @@
+---
+import { project } from '../projects';
+import Section from './Section.astro';
+
+const { location } = project;
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&z=15&output=embed`;
+---
+
+<Section id="location" eyebrow="Location" title={`Life in ${project.area}`} intro={location.intro}>
+  <div class="grid gap-8 md:grid-cols-2">
+    <div>
+      <p class="font-semibold">{location.address}</p>
+      <ul class="mt-6 divide-y divide-ink/10 border-y border-ink/10">
+        {location.nearby.map((n) => (
+          <li class="flex justify-between py-3">
+            <span>{n.place}</span>
+            <span class="text-ink/60">{n.time}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <iframe
+      title={`Map of ${project.name}`}
+      src={mapSrc}
+      loading="lazy"
+      class="h-80 w-full rounded-2xl border-0 md:h-full"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</Section>

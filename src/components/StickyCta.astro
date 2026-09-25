@@ -1,0 +1,26 @@
+---
+import CtaButton from './CtaButton.astro';
+---
+
+<div id="sticky-cta" class="fixed inset-x-0 bottom-0 z-50 translate-y-full border-t border-ink/10 bg-white/95 p-3 backdrop-blur transition-transform md:hidden">
+  <CtaButton class="w-full" />
+</div>
+
+<script>
+  // Show the mobile button once the hero is out of view, hide it at the booking section.
+  const bar = document.getElementById('sticky-cta')!;
+  const hero = document.querySelector('header');
+  const book = document.getElementById('book');
+  let pastHero = false;
+  let atBook = false;
+  const update = () => bar.classList.toggle('translate-y-full', !pastHero || atBook);
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.target === hero) pastHero = !e.isIntersecting;
+      if (e.target === book) atBook = e.isIntersecting;
+    }
+    update();
+  });
+  if (hero) io.observe(hero);
+  if (book) io.observe(book);
+</script>

@@ -1,0 +1,15 @@
+---
+import { project } from '../projects';
+import Section from './Section.astro';
+---
+
+<Section eyebrow="Why buyers choose it" title={`Why ${project.name}`}>
+  <div class="grid gap-6 md:grid-cols-3">
+    {project.highlights.map((h) => (
+      <div class="rounded-2xl border border-ink/10 p-6">
+        <h3 class="text-lg font-semibold">{h.title}</h3>
+        <p class="mt-2 text-ink/70">{h.text}</p>
+      </div>
+    ))}
+  </div>
+</Section>

@@ -1,0 +1,29 @@
+---
+import { project } from '../projects';
+import CtaButton from './CtaButton.astro';
+
+const { hero, name } = project;
+const bg = hero.image
+  ? `background-image: linear-gradient(to bottom, rgb(0 0 0 / .55), rgb(0 0 0 / .75)), url(${hero.image}); background-size: cover; background-position: center;`
+  : 'background-image: radial-gradient(ellipse at top right, color-mix(in srgb, var(--brand) 35%, transparent), transparent 60%);';
+---
+
+<header class="relative bg-ink text-white" style={bg}>
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
+    <span class="font-serif text-xl tracking-wide sm:text-2xl">{name}</span>
+    <a href="#book" data-cta class="hidden rounded-full border border-white/40 px-5 py-2 text-sm font-medium hover:bg-white/10 sm:inline-block">
+      {project.booking.ctaLabel}
+    </a>
+  </nav>
+  <div class="mx-auto max-w-6xl px-4 pb-20 pt-14 sm:px-6 md:pb-32 md:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-widest text-brand">{hero.eyebrow}</p>
+    <h1 class="mt-4 max-w-3xl font-serif text-4xl leading-[1.1] sm:text-5xl md:text-6xl">{hero.headline}</h1>
+    <p class="mt-6 max-w-2xl text-lg text-white/80">{hero.subheadline}</p>
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <CtaButton />
+      <a href="#residences" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 font-medium text-white/80 hover:text-white">
+        See residences ↓
+      </a>
+    </div>
+  </div>
+</header>

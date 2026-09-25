@@ -1,0 +1,18 @@
+---
+import { project } from '../projects';
+import Section from './Section.astro';
+
+const { deposit } = project;
+---
+
+<Section id="deposit" tone="cream" eyebrow="How you pay" title="Deposit schedule" intro={deposit.intro}>
+  <ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {deposit.steps.map((s, i) => (
+      <li class="rounded-2xl bg-white p-6">
+        <p class="text-sm text-ink/50">Step {i + 1}</p>
+        <p class="mt-1 font-serif text-4xl text-brand">{s.percent}</p>
+        <p class="mt-2">{s.when}</p>
+      </li>
+    ))}
+  </ol>
+</Section>

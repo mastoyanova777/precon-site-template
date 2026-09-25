@@ -1,0 +1,21 @@
+---
+import { project } from '../projects';
+
+interface Props {
+  variant?: 'solid' | 'outline';
+  class?: string;
+}
+const { variant = 'solid', class: className = '' } = Astro.props;
+const styles =
+  variant === 'solid'
+    ? 'bg-brand text-ink hover:brightness-110'
+    : 'border border-current hover:bg-white/10';
+---
+
+<a
+  href="#book"
+  data-cta
+  class={`inline-flex items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold transition ${styles} ${className}`}
+>
+  {project.booking.ctaLabel}
+</a>

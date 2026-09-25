@@ -1,0 +1,14 @@
+---
+import { project } from '../projects';
+---
+
+<div class="border-b border-ink/10 bg-white">
+  <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-y-6 px-4 py-8 sm:px-6 md:grid-cols-4">
+    {project.stats.map((s) => (
+      <div class="text-center">
+        <dt class="text-xs uppercase tracking-widest text-ink/60">{s.label}</dt>
+        <dd class="mt-1 font-serif text-3xl">{s.value}</dd>
+      </div>
+    ))}
+  </dl>
+</div>

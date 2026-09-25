@@ -1,0 +1,14 @@
+---
+import { project } from '../projects';
+import Section from './Section.astro';
+
+const { amenities } = project;
+---
+
+<Section id="amenities" tone="ink" eyebrow="Amenities" title="Resort living at home" intro={amenities.intro}>
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {amenities.items.map((a) => (
+      <li class="rounded-2xl border border-white/15 p-6 text-lg">{a}</li>
+    ))}
+  </ul>
+</Section>

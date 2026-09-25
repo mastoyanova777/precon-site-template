@@ -1,0 +1,61 @@
+---
+import { project } from '../projects';
+
+const { booking, agent } = project;
+---
+
+<section id="book" class="bg-ink px-4 py-16 text-white sm:px-6 md:py-24">
+  <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-5">
+    <div class="lg:col-span-2">
+      <p class="text-sm font-semibold uppercase tracking-widest text-brand">Book a call</p>
+      <h2 class="mt-2 font-serif text-3xl leading-tight sm:text-4xl md:text-5xl">{booking.heading}</h2>
+      <p class="mt-4 text-lg text-white/75">{booking.subheading}</p>
+      <ul class="mt-8 grid gap-3 text-white/85">
+        <li class="flex gap-3"><span class="text-brand">✓</span>Free, no obligation</li>
+        <li class="flex gap-3"><span class="text-brand">✓</span>Current prices and available units</li>
+        <li class="flex gap-3"><span class="text-brand">✓</span>Floor plans sent after the call</li>
+      </ul>
+      <p class="mt-8 text-sm text-white/60">
+        With {agent.name}, {agent.brokerage}
+      </p>
+    </div>
+    <div class="overflow-hidden rounded-2xl bg-white lg:col-span-3">
+      <div
+        id="calendly-embed"
+        class="calendly-inline-widget h-[700px] min-w-[280px]"
+        data-base-url={booking.calendlyUrl}
+      >
+        <noscript>
+          <a href={booking.calendlyUrl} class="block p-8 text-center text-ink underline">Open the booking page</a>
+        </noscript>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Pass ad tracking params (utm_*) through to Calendly so bookings are attributed,
+  // then load the widget.
+  const el = document.getElementById('calendly-embed');
+  if (el) {
+    const url = new URL(el.dataset.baseUrl!);
+    new URLSearchParams(location.search).forEach((v, k) => {
+      if (k.startsWith('utm_')) url.searchParams.set(k, v);
+    });
+    url.searchParams.set('hide_gdpr_banner', '1');
+    el.dataset.url = url.toString();
+
+    const s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  // Report bookings to Google Tag Manager / Meta Pixel when they are installed.
+  window.addEventListener('message', (e) => {
+    if (e.origin !== 'https://calendly.com' || e.data?.event !== 'calendly.event_scheduled') return;
+    const w = window as any;
+    w.dataLayer?.push({ event: 'call_booked' });
+    w.fbq?.('track', 'Schedule');
+  });
+</script>

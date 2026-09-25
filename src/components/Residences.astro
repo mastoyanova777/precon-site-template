@@ -1,0 +1,42 @@
+---
+import { project } from '../projects';
+import Section from './Section.astro';
+import CtaButton from './CtaButton.astro';
+
+const { residences } = project;
+---
+
+<Section id="residences" tone="cream" eyebrow="Residences" title="Find the right floor plan" intro={residences.intro}>
+  <div class="overflow-hidden rounded-2xl border border-ink/10 bg-white">
+    <table class="w-full text-left">
+      <thead class="bg-ink text-sm text-white">
+        <tr>
+          <th class="px-4 py-3 font-medium sm:px-6">Residence</th>
+          <th class="px-4 py-3 font-medium sm:px-6">Size</th>
+          <th class="px-4 py-3 font-medium sm:px-6">From</th>
+        </tr>
+      </thead>
+      <tbody>
+        {residences.units.map((u) => (
+          <tr class="border-t border-ink/10">
+            <td class="px-4 py-4 font-semibold sm:px-6">{u.type}</td>
+            <td class="px-4 py-4 text-ink/70 sm:px-6">{u.size}</td>
+            <td class="px-4 py-4 sm:px-6">{u.priceFrom}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-10 grid gap-10 md:grid-cols-2 md:items-center">
+    <ul class="grid gap-3">
+      {residences.features.map((f) => (
+        <li class="flex gap-3"><span class="text-brand">✓</span>{f}</li>
+      ))}
+    </ul>
+    <div class="rounded-2xl bg-ink p-8 text-white">
+      <p class="font-serif text-2xl">Want the full floor plans and price list?</p>
+      <p class="mt-2 text-white/70">Prices change as units sell. Book a quick call and get the current list sent to you.</p>
+      <CtaButton class="mt-6" />
+    </div>
+  </div>
+</Section>
