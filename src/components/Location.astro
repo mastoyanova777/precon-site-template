@@ -1,12 +1,16 @@
 ---
 import { project } from '../projects';
 import Section from './Section.astro';
+import Photo from './Photo.astro';
 
 const { location } = project;
 const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&z=15&output=embed`;
 ---
 
 <Section id="location" eyebrow="Location" title={`Life in ${project.area}`} intro={location.intro}>
+  {location.photo && (
+    <Photo photo={location.photo} sizes="(min-width: 1152px) 1152px, 100vw" class="mb-10 aspect-[2/1] w-full rounded-2xl object-cover" />
+  )}
   <div class="grid gap-8 md:grid-cols-2">
     <div>
       <p class="font-semibold">{location.address}</p>

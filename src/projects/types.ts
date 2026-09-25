@@ -1,6 +1,15 @@
 // Shape of one project's config. Every page section reads from this,
 // so a new pre-construction project only needs a new file in src/projects/.
 
+/**
+ * An image file in src/assets/<slug>/, referenced by file name
+ * (e.g. 'building.jpg'). Astro resizes and converts it at build time.
+ */
+export interface Photo {
+  file: string;
+  alt: string;
+}
+
 export interface ProjectConfig {
   slug: string;
   name: string;
@@ -26,8 +35,8 @@ export interface ProjectConfig {
     subheading: string;
   };
   hero: {
-    /** Path under public/, or leave empty for a color gradient. */
-    image?: string;
+    /** Background photo; without one the hero uses a color gradient. */
+    image?: Photo;
     eyebrow: string;
     headline: string;
     subheadline: string;
@@ -40,18 +49,24 @@ export interface ProjectConfig {
     units: {
       type: string;
       size: string;
+      terrace?: string;
       priceFrom: string;
     }[];
+    /** Small print under the price table, e.g. when prices were last updated. */
+    pricesNote?: string;
     features: string[];
+    photos?: Photo[];
   };
-  amenities: { intro: string; items: string[]; image?: string };
+  amenities: { intro: string; items: string[]; photos?: Photo[] };
   location: {
     intro: string;
     address: string;
     /** Google Maps embed "q" value, usually the address. */
     mapQuery: string;
     nearby: { place: string; time: string }[];
+    photo?: Photo;
   };
+  /** Leave steps empty to show a "get the deposit schedule on a call" card instead. */
   deposit: { intro: string; steps: { percent: string; when: string }[] };
   team: { role: string; name: string }[];
   faq: { q: string; a: string }[];

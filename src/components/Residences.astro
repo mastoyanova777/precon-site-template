@@ -2,8 +2,10 @@
 import { project } from '../projects';
 import Section from './Section.astro';
 import CtaButton from './CtaButton.astro';
+import Photo from './Photo.astro';
 
 const { residences } = project;
+const hasTerrace = residences.units.some((u) => u.terrace);
 ---
 
 <Section id="residences" tone="cream" eyebrow="Residences" title="Find the right floor plan" intro={residences.intro}>
@@ -12,7 +14,8 @@ const { residences } = project;
       <thead class="bg-ink text-sm text-white">
         <tr>
           <th class="px-4 py-3 font-medium sm:px-6">Residence</th>
-          <th class="px-4 py-3 font-medium sm:px-6">Size</th>
+          <th class="px-4 py-3 font-medium sm:px-6">Interior</th>
+          {hasTerrace && <th class="hidden px-4 py-3 font-medium sm:table-cell sm:px-6">Terrace</th>}
           <th class="px-4 py-3 font-medium sm:px-6">From</th>
         </tr>
       </thead>
@@ -21,12 +24,21 @@ const { residences } = project;
           <tr class="border-t border-ink/10">
             <td class="px-4 py-4 font-semibold sm:px-6">{u.type}</td>
             <td class="px-4 py-4 text-ink/70 sm:px-6">{u.size}</td>
-            <td class="px-4 py-4 sm:px-6">{u.priceFrom}</td>
+            {hasTerrace && <td class="hidden px-4 py-4 text-ink/70 sm:table-cell sm:px-6">{u.terrace}</td>}
+            <td class="whitespace-nowrap px-4 py-4 font-semibold sm:px-6">{u.priceFrom}</td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
+  {residences.pricesNote && <p class="mt-3 text-sm text-ink/60">{residences.pricesNote}</p>}
+  {residences.photos && (
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      {residences.photos.map((p) => (
+        <Photo photo={p} sizes="(min-width: 768px) 33vw, 100vw" class="aspect-[4/3] w-full rounded-2xl object-cover" />
+      ))}
+    </div>
+  )}
   <div class="mt-10 grid gap-10 md:grid-cols-2 md:items-center">
     <ul class="grid gap-3">
       {residences.features.map((f) => (

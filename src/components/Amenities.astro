@@ -1,14 +1,26 @@
 ---
 import { project } from '../projects';
 import Section from './Section.astro';
+import Photo from './Photo.astro';
 
 const { amenities } = project;
 ---
 
 <Section id="amenities" tone="ink" eyebrow="Amenities" title="Resort living at home" intro={amenities.intro}>
-  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  {amenities.photos && (
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+      {amenities.photos.map((p, i) => (
+        <Photo
+          photo={p}
+          sizes="(min-width: 768px) 33vw, 50vw"
+          class={`h-full w-full rounded-2xl object-cover ${i === 0 ? 'col-span-2 row-span-2 aspect-square md:aspect-auto' : 'aspect-[4/3]'}`}
+        />
+      ))}
+    </div>
+  )}
+  <ul class="mt-10 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
     {amenities.items.map((a) => (
-      <li class="rounded-2xl border border-white/15 p-6 text-lg">{a}</li>
+      <li class="flex gap-3"><span class="text-brand">✓</span>{a}</li>
     ))}
   </ul>
 </Section>
