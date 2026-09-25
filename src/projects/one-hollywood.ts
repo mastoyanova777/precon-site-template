@@ -135,11 +135,11 @@ const project: ProjectConfig = {
     },
   ],
   agent: {
-    name: 'Mariya Stoyanova',
-    brokerage: 'PLACEHOLDER Brokerage',
-    phone: '',
+    name: 'Mariya Stoyanova, P.A.',
+    brokerage: 'United Realty Group',
+    phone: '(646) 678-6477',
     email: '',
-    license: '',
+    license: '3343472',
   },
   disclaimer: [
     'This website is operated by an independent licensed real estate agent and is not the official website of the developer. Information is believed accurate but is not guaranteed and is subject to change without notice.',

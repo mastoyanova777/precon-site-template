@@ -21,8 +21,8 @@ const { agent, team, disclaimer } = project;
       </dl>
       <div>
         <p class="text-white/85">{agent.name}</p>
-        <p>{agent.brokerage}{agent.license && ` · Lic. ${agent.license}`}</p>
-        {agent.phone && <a class="block hover:text-white" href={`tel:${agent.phone}`}>{agent.phone}</a>}
+        <p>{agent.brokerage}{agent.license && ` · License #${agent.license}`}</p>
+        {agent.phone && <a class="block hover:text-white" href={`tel:${agent.phone.replace(/[^\d+]/g, '')}`}>{agent.phone}</a>}
         {agent.email && <a class="block hover:text-white" href={`mailto:${agent.email}`}>{agent.email}</a>}
       </div>
     </div>

@@ -18,6 +18,12 @@ const { booking, agent } = project;
       <p class="mt-8 text-sm text-white/60">
         With {agent.name}, {agent.brokerage}
       </p>
+      {agent.phone && (
+        <p class="mt-2 text-sm text-white/60">
+          Prefer to talk now? Call{' '}
+          <a class="text-white underline" href={`tel:${agent.phone.replace(/[^\d+]/g, '')}`}>{agent.phone}</a>
+        </p>
+      )}
     </div>
     <div class="overflow-hidden rounded-2xl bg-white lg:col-span-3">
       <div
