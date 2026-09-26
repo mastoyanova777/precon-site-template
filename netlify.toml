@@ -1,0 +1,8 @@
+# Netlify build settings. Set the PROJECT environment variable in Netlify
+# to build a different project from src/projects/ (default: one-hollywood).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
