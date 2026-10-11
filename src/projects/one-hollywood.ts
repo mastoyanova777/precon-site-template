@@ -164,6 +164,7 @@ const project: ProjectConfig = {
     phone: '(646) 678-6477',
     email: '',
     license: '3343472',
+    neoKey: '61fc326bb61f9913c09f35b4',
   },
   disclaimer: [
     'This website is operated by an independent licensed real estate agent and is not the official website of the developer. Information is believed accurate but is not guaranteed and is subject to change without notice. Renderings are artist conceptions.',

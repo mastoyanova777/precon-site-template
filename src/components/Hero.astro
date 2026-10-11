@@ -16,10 +16,15 @@ const { hero, name } = project;
     <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,color-mix(in_srgb,var(--brand)_35%,transparent),transparent_60%)]"></div>
   )}
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
-    <span class="font-serif text-xl tracking-wide sm:text-2xl">{name}</span>
+    <span class="font-serif text-lg tracking-wide sm:text-2xl">{name}</span>
+    <div class="flex items-center gap-5">
+    {project.agent.neoKey && (
+      <a href="/new-developments" class="whitespace-nowrap text-sm font-medium text-white/85 hover:text-white">New Developments</a>
+    )}
     <a href="#book" data-cta class="hidden rounded-full border border-white/40 px-5 py-2 text-sm font-medium hover:bg-white/10 sm:inline-block">
       {project.booking.ctaLabel}
     </a>
+    </div>
   </nav>
   <div class="mx-auto max-w-6xl px-4 pb-24 pt-16 sm:px-6 md:pb-40 md:pt-28">
     <p class="text-sm font-semibold uppercase tracking-widest text-brand">{hero.eyebrow}</p>

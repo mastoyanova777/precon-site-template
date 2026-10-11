@@ -76,6 +76,8 @@ export interface ProjectConfig {
     phone?: string;
     email?: string;
     license?: string;
+    /** NewEstateOnly agent key; when set, the site gets a /new-developments page. */
+    neoKey?: string;
   };
   /** Legal text shown in the footer. */
   disclaimer: string[];
